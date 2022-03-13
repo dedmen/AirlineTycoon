@@ -391,6 +391,13 @@ void DoAppPath (void)
 
    AppPath = buffer;
    SDL_free(buffer);
+
+   // Custom stuff, use WORKING DIRECTORY instead of DIRECTORY OF EXECUTABLE 
+   char currentDir[255];
+   GetCurrentDirectoryA(255, currentDir);
+   AppPath = currentDir;
+   if (AppPath.back() != '\\')
+    AppPath.push_back('\\');
 }
 
 //--------------------------------------------------------------------------------------------
