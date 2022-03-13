@@ -153,7 +153,9 @@ void MessagePump (void)
 //--------------------------------------------------------------------------------------------
 GameFrame::GameFrame()
 {
-   CRect  rect (0,0,640,480);
+   //CRect  rect (0,0,640,480);
+   //CRect  rect (0,0,640*2,480*2);
+   CRect  rect (0,0,1920,1080);
 
    pGLibPause = NULL;
    PauseFade  = 0;
