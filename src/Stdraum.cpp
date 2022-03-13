@@ -436,9 +436,30 @@ void CStdRaum::ProcessEvent(const SDL_Event& event, CPoint position)
    case SDL_KEYDOWN:
    {
       UINT nFlags = event.key.keysym.scancode | ((SDL_GetModState() & KMOD_LALT) << 5);
-      OnKeyDown(toupper(event.key.keysym.sym), event.key.repeat, nFlags);
+      auto sym = toupper(event.key.keysym.sym);
+
+      if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
+          sym = VK_LEFT;
+      if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+          sym = VK_RIGHT;
+
+      OnKeyDown(sym, event.key.repeat, nFlags);
       OnChar(SDL_GetModState() & KMOD_SHIFT ? toupper(event.key.keysym.sym) : event.key.keysym.sym,
          event.key.repeat, nFlags);
+   }
+   break;
+   case SDL_KEYUP:
+   {
+       UINT nFlags = event.key.keysym.scancode | ((SDL_GetModState() & KMOD_LALT) << 5);
+
+       auto sym = toupper(event.key.keysym.sym);
+
+       if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
+           sym = VK_LEFT;
+       if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+           sym = VK_RIGHT;
+
+       OnKeyUp(sym, event.key.repeat, nFlags);
    }
    break;
    case SDL_MOUSEBUTTONDOWN:

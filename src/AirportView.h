@@ -18,6 +18,10 @@ public:
    ULONG          UnderCursor;         //Das Objekt, über dem der Cursor gerade ist
 	SLONG			   PersonsToAdd;		   //Zahl Personen, die noch zum Test kommen sollen
 
+	bool scrollLeftKey = false;
+	bool scrollRightKey = false;
+
+
 // Operations
 public:
    void AnnouceTipDataUpdate (SLONG TipType);
@@ -41,6 +45,7 @@ protected:
 	virtual void OnPaint();
 	virtual void OnLButtonDown(UINT nFlags, CPoint point);
 	virtual void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 	virtual void OnToggleEditor();
 	virtual void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 	virtual void OnRButtonDown(UINT nFlags, CPoint point);

@@ -174,6 +174,12 @@ void AirportView::FocusCameraOnPos (XY Pos, BOOL Speed)
       if (gMouseScrollSpeed<44+(gMouseLButton-1)*30) gMouseScrollSpeed+=2;
       if (gMouseScrollSpeed>44) gMouseScrollSpeed=44;
       gMouseScroll=TRUE;
+   } else if (scrollLeftKey) {
+        gMouseScrollSpeed = -44;
+        gMouseScroll = TRUE;
+   } else if (scrollRightKey) {
+        gMouseScrollSpeed = 44;
+        gMouseScroll = TRUE;
    }
 
    //Weiches Scrolling abbremsen
@@ -1889,7 +1895,30 @@ void AirportView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
             }
          }
       }
+
+      switch (nChar)
+      {
+      case VK_LEFT:
+            scrollLeftKey = true; break;
+      case VK_RIGHT:
+            scrollRightKey = true; break;
+      }
    }
+}
+
+void AirportView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+    //Sowas darf nur das Hauptfenster, was immer links oben ist und nicht verdeckt wird:
+    if (WinP1.x == 0 && WinP1.y == 0 && TopWin == NULL)
+    {
+        switch (nChar)
+        {
+        case VK_LEFT:
+            scrollLeftKey = false; break;
+        case VK_RIGHT:
+            scrollRightKey = false; break;
+        }
+    }
 }
 
 //--------------------------------------------------------------------------------------------
